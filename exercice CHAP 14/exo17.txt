@@ -1,0 +1,2 @@
+SELECT nom,prenom,adresse,ville,mail FROM client WHERE adresse='75
+Bd Hochimin' AND ville='Lille' ;

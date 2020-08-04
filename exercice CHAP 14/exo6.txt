@@ -1,0 +1,6 @@
+"A";"Toyota";
+"B";"Peugeot";
+"C";"Suzuki";
+"D";"Mercedes";
+"E";"Pick up";
+"F";"4x4";

@@ -1,0 +1,3 @@
+SELECT id_proprietaire FROM possede
+GROUP BY id_proprietaire
+HAVING count(*) >1 ;

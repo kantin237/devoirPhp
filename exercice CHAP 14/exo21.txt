@@ -1,0 +1,6 @@
+SELECT possede.id_vehicule,nom_modele,proprietaire.id_proprietaire
+FROM vehicule,modele,proprietaire,possede
+WHERE proprietaire.nom_proprietaire='kemkeng'
+AND proprietaire.id_proprietaire=possede.id_proprietaire
+AND possede.id_vehicule=vehicule.id_vehicule
+AND vehicule.id_modele=modele.id_modele ;

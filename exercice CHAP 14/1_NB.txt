@@ -1,0 +1,3 @@
+la base de donnees partiel nommee voitures_BD_exo_1_5_CHAP_14 repond aux exerices 1 a 5.
+
+et la base de donnees voitures_BD_final reponds au reste de question

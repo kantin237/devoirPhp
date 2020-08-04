@@ -5,6 +5,22 @@
 	<meta charset="utf-8">
 </head>
 <body>
+
+        <?php
+echo 'Vous utilisez un navigateur de type: ';
+$agent = $_SERVER["HTTP_USER_AGENT"];
+
+echo $agent;
+
+?>
+    
+     <p></p>
+
+        <?php
+            echo "Votre navigateur a pour \"signature\":<br />".
+             htmlEntities($_SERVER["HTTP_USER_AGENT"]);
+?>
+   
 	<?php
 	//premiere facon de creer un tableau ou tableau numerote ou simple
 	$prenons = array('pierre', 'paul', 'Jacques');
@@ -14,6 +30,7 @@
 	$prenons[2]= 'Jacques';*/
 
 	// tableau associatif
+
 	$age = array(
 		'Pierre' => 24,
 		'Paul' => 22,

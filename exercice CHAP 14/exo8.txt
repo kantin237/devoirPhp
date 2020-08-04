@@ -1,0 +1,4 @@
+pour repondre a cette question,  nous avons utilise l'interface graphique de PhpMyAdmin, nous avons mis renomer 
+la bases de donnees qui regroupe tout les exercices : voitures_BD_final.
+
+pour le reste des exercices a partir de l'exo 9 ,  il s'agit pour nous de rediger les requetes SQL.

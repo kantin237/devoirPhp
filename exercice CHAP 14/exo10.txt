@@ -1,0 +1,3 @@
+SELECT id_article, designation, prix
+FROM article
+WHERE prix>100 AND prix <500 ;

@@ -1,0 +1,6 @@
+SELECT nom,prenom,article.id_article,designation
+FROM `client` ,commande,article,ligne
+WHERE client.id_client=commande.id_client
+AND ligne.id_comm=commande.id_comm
+AND ligne.id_article=article.id_article
+ORDER BY nom ;
