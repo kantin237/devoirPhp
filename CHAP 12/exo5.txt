@@ -1,0 +1,12 @@
+<?php
+	$adresses=array("kantin@yahoo.com","junior@gmail.com","elix@yahoo.com");
+	$objet="Demande d'emploi";
+	$message="j'ai l'honneur de venir aupres de votre haute personnalite sollicite .......";
+	//on parcours le tableau avec le foreach
+	foreach($adresses as $adresse){
+		if(mail($adresse,$objet,$message)) {
+
+			echo "le Mail a été envoyé à $adresse";
+		} 
+	}
+?>

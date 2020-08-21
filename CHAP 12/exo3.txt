@@ -1,0 +1,78 @@
+	// voici le contenu du fichier exixtance cookies.php
+<?php
+	if(isset($_COOKIE['nom']) AND isset($_COOKIE['password'])) {
+		$login="kantin";
+		$motpass="237";
+		$nom=$_COOKIE['nom'];
+		$pass=$_COOKIE['password'];
+
+		if($nom==$login AND $pass==$motpass) {
+			$message= "<h1>BONJOUR ".ucfirst($nom)."</h1>";
+			$contenu="<p> Welcome </p>";
+			} else
+				{
+				echo "<script> window.location='acceuil.php' ;</script>";
+				} 
+				} else
+			{
+				echo "<script > window.location='acceuil.php' </script>";
+			}
+?>
+<!DOCTYPE>
+	<html>
+		<head>
+			<meta charset="utf-8" />
+			<title>Exo 3 chapitre 12</title>
+		</head>
+		<body>
+			<?php echo $message;
+				echo $contenu;
+			?>
+		</body>
+	</html>
+	
+	// voici le contenu du fichier acceuil.php
+	
+	<!DOCTYPE>
+	<html>
+		<head>
+			<meta charset="utf-8" />
+			<title>Exo 3 chapitre 12</title>
+		</head>
+		<body>
+			<form method="post" action="ch12exo3.php">
+				<fieldset>
+					<legend>Saisissez votre nom et mot de passe</legend>
+					<label>Nom :
+						<input type="text" name="nom" />
+					</label><br /><br />
+					<label>Pass :
+						<input type="text" name="password" />
+					</label><br />
+					<input type="submit" value="Envoyer" />
+					<input type="reset" value="Effacer" />
+				</fieldset>
+			</form>
+		</body>
+	</html>
+	
+	// voici le contenu du fichier registration.php
+	
+	<?php
+	$login="kantin";
+	$motpass="237";
+	$nom=$_POST['nom'];
+	$pass=$_POST['password'];
+
+	if($nom==$login AND $pass==$motpass) {
+		$time = time () +20;
+		setcookie("nom",$nom,$time);
+		setcookie("pass",$pass,$time);
+		echo "<script> window.location='acceuil.php' ;</script>";
+				} 
+				} else
+			{
+				echo "<script > window.location='cookies.php' </script>";
+			}
+	}
+?>

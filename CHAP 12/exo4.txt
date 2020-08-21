@@ -1,0 +1,36 @@
+<?php
+	if(isset($_COOKIE['page']))
+	{
+	$page=$_COOKIE['page'];
+	header("Location:$page");
+	}
+
+	if(isset($_POST['page']))
+	{
+	setcookie("page",$_POST['page'],time()+10);
+	header("Location:$page");
+	echo "Vous avez choisi ",$_POST['page'],"<br />";
+	}
+?>
+<!DOCTYPE>
+	<html>
+		<head>
+			<meta meta-charset="utf-8"/>
+			<title>Exercice 4 chapitre 12</title>
+		</head>
+		<body>
+			<form method="post" action="page1.php">
+				<fieldset>
+					<legend>Choisissez votre page préférée</legend>
+					<select name="page">
+						<option value="page1.php">Accueil</option>
+						<option value="page2.php">Cinéma</option>
+						<option value="page3.php">Voyages</option>
+					</select>
+					<br />
+					<input type="submit" value="Envoyer" />
+					<input type="reset" value="Effacer" />
+				</fieldset>
+			</form>
+		</body>
+	</html>

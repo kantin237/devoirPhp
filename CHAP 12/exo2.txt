@@ -1,0 +1,35 @@
+<?php
+	if(!isset($_COOKIE ['couleur']['fond']) AND !isset($_COOKIE ['couleur']['page']) ) {
+		$fond=$_POST['fond'];
+		$page=$_POST['page'];
+		$time=time() + 2*30*24*3600;
+		setcookie("couleur[fond]",$fond,$time);
+		setcookie("couleur[page]",$page,$time);
+		} else
+
+		{
+		$fond=$_COOKIE ['couleur']['fond'];
+		$page=$_COOKIE ['couleur']['page'];
+	}
+?>
+<!DOCTYPE">
+	<html>
+		<head>
+			<meta charset="utf-8" />
+			<title>Exercice 1 Chapitre 12</title>
+		</head>
+	<body>
+		<form method="post" action="">
+		<fieldset>
+		<legend>Choisissez vos couleurs</legend>
+		<label>Couleur de fond <input type="text" name="fond" />
+
+		</label><br /><br />
+		<label>Couleur de texte de page<input type="text" name="page" />
+		</label><br />
+		<input type="submit" value="Envoyer" />
+		<input type="reset" value="Effacer" />
+		</fieldset>
+		</form>
+	</body>
+	</html>
