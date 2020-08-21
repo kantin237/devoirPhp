@@ -1,0 +1,60 @@
+<?php
+try{
+    
+$user="root";
+$password="";
+$host="localhost";
+$database="voitures";
+$connexion= new PDO("mysql:host=$host;databasename=$database",$user,$password) ;
+if(!$connexion)
+{
+echo "Une erreur s'est produite au niveau de la connexion";
+}
+else{
+    $rs = $connexion->prepare("SELECT *  FROM  model ORDER BY model");
+$rs->execute();
+$result = $rs->fetchAll();
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     print_r($result);
+}
+}catch(Exception $e){
+    echo 'Voici l\'erreur ',  $e->getMessage(), "\n";
+
+}
+
+?>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Exercice 1 chapitre 16</title>
+</head>
+<body>
+    <table>
+    <tr>
+    <td></td>
+    <td></td>
+    </tr>
+    
+    <?php
+    try{
+        $response = $connexion->prepare("SELECT *  FROM  model");
+        $response->execute();
+        $response->bindColumn('nom_type', $nom);
+        $response->bindColumn('numero_type', $numero);
+   
+       while ($donnees=$response->fetch(PDO::FETCH_BOUND)){
+           echo "<tr>"."<td>".$nom."</td>"."<td>".$numero."</td>"."</tr>";
+           
+           } 
+  
+   $response->closeCursor();
+    }catch(Exception $e){
+        $e->getMessage();
+    }
+    
+    ?>
+    
+    </table>
+</body>
+</html>
+

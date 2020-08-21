@@ -1,0 +1,45 @@
+<?php
+if(isset($_POST['id_modele'])&&isset($_POST['nom_modele'])){
+    try {
+        $database="voitures";
+		$host="localhost";
+		$user="root";
+		$password="";
+		$id_modele=$_POST['id_modele'];
+		$nom_modele=$_POST['nom_modele'];
+		$connexion= new PDO("mysql:host=$host;databasename=$database",$user,$password);
+		$requete=$connexion->prepare("insert into modele values(:id_modele,:nom_modele)");
+		$requete->execute([
+				'id_modele'=>$id_modele,
+			   'nom_modele'=>$nom_modele]);
+		$requete->closeCursor();
+    } catch (Exception $e) {
+        $e->getMessage();
+    }
+
+
+}
+?>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta >
+    <title>Exercice 2 chap 16</title>
+    <meta charset="utf-8">
+</head>
+<body>
+    <fieldset>
+    <legend>
+    insertion dans la table modele
+    </legend>
+    <form method='post'>
+    <label for="id_modele">Numero de Model</label>
+    <input type="text" name="id_modele" id="id_modele">
+    <label for="nom_modele">Type de model</label>
+    <input type="text" name="nom_modele" id="nom_modele">
+    <input type="submit" value="Insert">
+    </form>
+    </fieldset>
+</body>
+</html>

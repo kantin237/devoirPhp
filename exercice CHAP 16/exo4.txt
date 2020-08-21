@@ -1,0 +1,113 @@
+<?php
+try {
+    if(isset($_POST['nom_vehicule'])&&isset($_POST['nom_modele'])){
+        $nom_vehicule=$_POST['nom_vehicule'];
+        $nom_modele=$_POST['nom_modele'];
+    }
+    $database="voitures";
+    $host="localhost";
+    $user="root";
+    $password="";
+   
+    $connexion= new PDO("mysql:host=$host;databasename=$database",$user,$password);
+    $requete = $connexion->prepare("SELECT nom_modele FROM  modele");
+    $requete->execute();
+    $stmt = $connexion->prepare("SELECT nom_vehicule FROM  vehicule");
+    $stmt->execute();
+ 
+
+} catch (Exception $e) {
+    $e->getMessage();
+}
+?>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Exercice 4</title>
+</head>
+<body>
+<fieldset>
+<legend>
+rechercher un proprietaire
+</legend>
+<form action="" method="post">
+<label for="nom_vehicule"> marque du vehicule</label>
+<select name="nom_vehicule" id="nom_vehicule">
+<?php
+try {
+    $stmt->bindColumn('nom', $voiture);
+    while ($donnees=$stmt->fetch(PDO::FETCH_BOUND)){
+        echo "<option value='$voiture'>$voiture</option>";
+        
+        } 
+
+$stmt->closeCursor();
+
+} catch (Exception $g) {
+    //throw $th;
+    $g->getMessage();
+}
+?>
+</select>
+<label for="nom_modele">modele</label>
+<select name="nom_modele" id="nom_modele">
+<?php
+try {
+    $requete->bindColumn('nom_modele', $nom);
+    while ($donnees=$requete->fetch(PDO::FETCH_BOUND)){
+        echo "<option value='$nom'>$nom</option>";
+        
+        } 
+
+$stmt->closeCursor();
+
+} catch (Exception $f) {
+    $f->getMessage();
+}
+?>
+</select>
+<input type="submit" value="rechercher">
+</form>
+</fieldset>
+<table>
+    <tr>
+    <td></td>
+    <td></td>
+    </tr>
+    
+    <?php
+    try{
+        $reqs= $connexion->prepare("select distinct p.nom as name ,Prenom, v.nom  as voiture from proprietaire p , vehicule v ,posseder where p.num =(select num_cli from posseder where matvehi=(select matricule from vehicule where nom = :nom  and typemodele=(select id_modele from modele where  nom_modele= :type)))  and v.matricule = (select matricule from vehicule where nom = :nom  and typemodele=(select id_modele from modele where  nom_modele= :type)) 
+        ");
+        $reqs->bindParam(':type',  $nom_modele, PDO::PARAM_STR,80);
+        $reqs->bindParam(':nom', $nom_vehicule, PDO::PARAM_STR,80);
+        $reqs->execute();
+       echo $nom_vehicule;
+        
+        $reqs->bindColumn('Prenom', $pname);
+        $reqs->bindColumn('name', $name);
+        $reqs->bindColumn("voiture",$voiture1);
+        $donnees=$reqs->fetch(PDO::FETCH_ASSOC);
+
+        
+       
+            while ($donnees!=null){
+                echo "bonjour";
+                echo $name;
+                echo $pname;
+                echo $voiture1;
+                echo "<tr>"."<td>".$donnees['name']."</td>"."<td>".$pname."</td>"."</tr>";
+                $donnees=$reqs->fetch(PDO::FETCH_ASSOC);
+                } 
+  
+  
+           $reqs->closeCursor();
+    }catch(Exception $e){
+        $e->getMessage();
+    }
+    
+    ?>
+    </table>
+</body>
+</html>

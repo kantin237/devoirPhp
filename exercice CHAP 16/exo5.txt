@@ -1,0 +1,62 @@
+<?php
+
+try {
+    if(isset($_POST['proprietaire'])){
+        $name=$_POST['proprietaire'];
+    }
+    $database="voitures";
+    $host="localhost";
+    $user="root";
+    $password="";
+   
+    $connexion= new PDO("mysql:host=$host;databasename=$database",$user,$passwd);
+	
+    $requeteP= $connexion->prepare("SELECT nom_propritaire , Prenom_propritaire FROM   proprietaire ");
+    $requeteP->execute();
+    $requeteV=$connexion->prepare("select nom_vehicule from vehicule WHERE vehicule.id_vehicule=(select id_vehicule from possede WHERE possede.id_proprietaire=(SELECT id_proprietaire FROM  proprietaire WHERE nom_propritaire like :nom_propritaire))");
+    $requeteV->bindParam(':nom',$name,PDO::PARAM_STR);
+    $requeteV->execute();
+
+} catch (Exception $e) {
+    $e->getMessage();
+}
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Exercice 5</title>
+</head>
+<body>
+<fieldset>
+    <form action="" method="post">
+    <label for="proprietaire">Propietaire</label>
+    <select name="proprietaire" id="proprietaire">
+    <?php
+try {
+    $requeteP->bindColumn('nom', $nom);
+    while ($donnees=$requeteP->fetch(PDO::FETCH_BOUND)){
+        echo "<option value='$nom'>$nom</option>";
+        
+        } 
+
+$requeteP->closeCursor();
+
+}catch(Exception $f) {
+    //throw $th;
+    $f->getMessage();
+}
+?>
+
+    
+    </select>
+    <input type="submit" value="submit">
+    
+    <p><?php  echo $name; 
+    $data = $requeteV->fetchAll();
+    print_r($data);?></p>
+    </form>
+</fieldset>
+</body>
+</html>
